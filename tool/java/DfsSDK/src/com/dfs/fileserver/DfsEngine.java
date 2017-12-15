@@ -23,7 +23,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
 import org.bcos.web3j.tx.BcosRawTxManager;
-import org.junit.internal.runners.ErrorReportingRunner;
 import org.juzix.web3j.NonceTransactionManager;
 import org.juzix.web3j.protocol.CostomerWeb3j;
 import org.juzix.web3j.protocol.CustomerWeb3jFactory;
