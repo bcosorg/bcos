@@ -54,20 +54,20 @@ $ cd bcos/systemcontractv2
 $ cnpm install
 # 修改config.js中proxy端口为35500
 $ sed -i 's/127.0.0.1:8545/127.0.0.1:35500/' config.js
-$ babel-node deploy.js
+$ ./node_modules/.bin/babel-node deploy.js
 # 将输出中，SystemProxy合约地址记下来，例如 SystemProxy合约地址 0xff27dc5cc5144c626b9fdc26b2f292d9df062470
 
 # 修改docker/node-0/config.json中systemproxyaddress为上一步骤记录的SystemProxy合约地址 
 $ sed -i 's/"systemproxyaddress":"0x0"/"systemproxyaddress":"0xff27dc5cc5144c626b9fdc26b2f292d9df062470"/' ../docker/node-0/config.json
 
 # 检查node-0/config.json中系统合约字段是否正确
-$ cat node-0/config.json | grep systemproxyaddress
+$ cat ../docker/node-0/config.json | grep systemproxyaddress
 
 # 重启node-0
 $ docker restart $(docker ps -a | grep bcos-node-0 | awk 'NR==1{print$1}')
 
 # 创世节点信息写入合约
-$ babel-node tool.js NodeAction registerNode ../docker/node-0/node.json 
+$ ./node_modules/.bin/babel-node tool.js NodeAction registerNode ../docker/node-0/node.json 
 ```
 
 ### 2.2 生成新节点配置文件
@@ -85,7 +85,7 @@ $ ./scripts/genConfig.sh 1 node-0
 ```bash
 $ cd bcos/systemcontractv2
 # 新加节点node-1信息写入合约
-$ babel-node tool.js NodeAction registerNode ../docker/node-1/node.json 
+$ ./node_modules/.bin/babel-node tool.js NodeAction registerNode ../docker/node-1/node.json 
 
 # 启动新加入节点node-1，参数为新节点配置文件完整路径
 $ ../docker/scripts/start_bcos_docker.sh $PWD/../docker/node-1 
